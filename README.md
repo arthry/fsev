@@ -12,12 +12,12 @@ sudo chmod +x /usr/local/bin/fsev
 ### Usage
 
 ```
-fsev <command>
+$ fsev <command>
 ```
 
-This will run the given command when a file change event occurs in the current directory or subdirectories.
+This will run the given command when a file change event occurs in the current directory or subdirectories. *Ctrl-C* to exit.
 
-Example:
+### Example
 
 In a new directory:
 
@@ -32,7 +32,7 @@ $ rm -rf test/
 ```
 
 ### How it works
-It does so by creating a temporary `plist` xml file that use `WatchPaths`, and loads it using `launchctl`. Command given is also extended to have a log file at with same uuid under `/tmp/`. Upon quit, plist gets unloaded, and both files are deleted. While consequent changes doesn't pop immediately, it might need few more seconds to catch up. 
+It does so by creating a temporary `plist` xml file that use `WatchPaths`, and loads it using `launchctl`. Command given is also extended to have a log file at with same uuid under `/tmp/`. Upon quit, plist gets unloaded, and both files are deleted. While consequent changes don't pop immediately, it might need few more seconds to catch up. 
 
 ### Troubleshooting
 
