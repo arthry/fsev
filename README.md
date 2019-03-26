@@ -1,6 +1,6 @@
 ## FSEV
 
-Fsev is a pure OSX file event watcher and command triggerer under 50 lines.
+Fsev is a OSX file event watcher and command triggerer under 50 lines.
 
 ### Installation
 
@@ -23,12 +23,10 @@ In a new directory:
 
 ```
 $ fsev say something changed 
-<open a new terminal>
+<open a new terminal tab>
 $ mkdir -p test/dir/
 $ touch test/dir/test.txt
-<wait few secs>
 $ rm -rf test/
-<wait few secs>
 ```
 
 ### How it works
