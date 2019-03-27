@@ -1,6 +1,8 @@
 #!/usr/bin/python
-import sys
+import atexit
 import os
+import signal
+import sys
 import uuid
 
 if len(sys.argv) < 2:
@@ -34,15 +36,17 @@ http://www.apple.com/DTDs/PropertyList-1.0.dtd>
 
 os.system("mkdir -p ~/Library/LaunchAgents")
 os.system("echo '%s' > ~/Library/LaunchAgents/%s.plist" % (watcher, label))
+os.system("touch /tmp/%s.log" % label)
+os.system("launchctl load ~/Library/LaunchAgents/%s.plist" % label)
+print("loaded %s.plist" % label)
 
-try:
-    os.system("touch /tmp/%s.log" % label)
-    os.system("launchctl load ~/Library/LaunchAgents/%s.plist" % label)
-    print("loaded %s.plist" % label)
-    os.system("tail -f /tmp/%s.log" % label)
-finally:
+def handle_exit():
     os.system("launchctl unload ~/Library/LaunchAgents/%s.plist" % label)
     os.system("rm -rf ~/Library/LaunchAgents/%s.plist" % label)
     os.system("rm -rf /tmp/%s.log" % label)
     print("unloaded %s.plist" % label)
+
+atexit.register(handle_exit) 
+signal.signal(signal.SIGHUP, handle_exit)
+os.system("tail -f /tmp/%s.log" % label)
 

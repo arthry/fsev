@@ -15,7 +15,7 @@ sudo chmod +x /usr/local/bin/fsev
 $ fsev <command>
 ```
 
-This will run the given command when a file change event occurs in the current directory or subdirectories. *Ctrl-C* to exit.
+This will run the given command when a file change event occurs in the current directory or subdirectories. **Ctrl-C** to exit.
 
 ### Example
 
@@ -34,7 +34,7 @@ It does so by creating a temporary `plist` xml file that use `WatchPaths`, and l
 
 ### Troubleshooting
 
-If you accidentaly close the terminal, current `plist` might remain loaded. First, find out /tmp/<id> log exists, remove it and make sure to unload plist by following command:
+While the terminal quit case is handled, in case current `plist` might remain loaded, you can unload it manually. First, find out /tmp/<id> log exists, remove it and make sure to unload plist by following command:
 
 ```
 $ launchctl unload ~/Library/LaunchAgents/<id>.plist
